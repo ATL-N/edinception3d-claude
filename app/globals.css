@@ -1,26 +1,302 @@
 @import "tailwindcss";
 
+/* // app/globals.css */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light mode */
+  --color-primary: #e75d8f;
+  --color-primary-light: #ff8fb1;
+  --color-primary-dark: #c93e6f;
+  --color-secondary: #4a90e2;
+  --color-background: #ffffff;
+  --color-panel-background: #f8f8f8;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-border: #e0e0e0;
+  --color-accent: #5cb85c;
+  --color-accent-light: #80c780;
+  --color-icon: #555555;
+  --color-menu-hover: #f0f0f0;
+
+  /* Common */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme="dark"] {
+  --color-primary: #ff80ab;
+  --color-primary-light: #ff9ebb;
+  --color-primary-dark: #e64980;
+  --color-secondary: #64b5f6;
+  --color-background: #121212;
+  --color-panel-background: #1e1e1e;
+  --color-text: #f0f0f0;
+  --color-text-light: #b0b0b0;
+  --color-border: #333333;
+  --color-accent: #4caf50;
+  --color-accent-light: #81c784;
+  --color-icon: #aaaaaa;
+  --color-menu-hover: #2c2c2c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Custom component styles */
+.designer-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.sidebar {
+  width: 115px;
+  background-color: var(--color-panel-background);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-md);
+  color: var(--color-text-light);
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-item:hover {
+  background-color: var(--color-menu-hover);
+}
+
+.sidebar-item.active {
+  color: var(--color-primary);
+}
+
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-navigation {
+  height: 60px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-md);
+  background-color: var(--color-background);
+}
+
+.logo {
+  color: var(--color-primary);
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: var(--spacing-xl);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-sm);
+  font-size: 12px;
+  color: var(--color-text-light);
+}
+
+.button-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+}
+
+.design-area {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.tools-panel {
+  max-width: 300px;
+  border-right: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  background-color: var(--color-panel-background);
+  overflow: auto;
+}
+
+.tools-panel-collapsed {
+  max-width: 50px;
+  border-right: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  background-color: var(--color-panel-background);
+  overflow-y: auto;
+}
+
+.view-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.view-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-panel-background);
+}
+
+.view-tab {
+  padding: var(--spacing-md);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.view-tab.active {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.view-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+}
+
+.pattern-grid {
+  background-image: linear-gradient(#e0e0e0 1px, transparent 1px),
+    linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+  background-size: 20px 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.options-panel {
+  max-width: 300px;
+  border-left: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+  background-color: var(--color-panel-background);
+  overflow-y: auto;
+}
+
+.options-panel-collapsed {
+  max-width: 300px;
+  border-left: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+  background-color: var(--color-panel-background);
+  overflow-y: auto;
+  padding-top: 0;
+}
+
+.option-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.option-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+}
+
+.option-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.option-button {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.option-button.active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.model-viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.model-viewer img {
+  max-height: 90%;
+  max-width: 90%;
 }
