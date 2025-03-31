@@ -1,7 +1,7 @@
 # version: '3.8'
 
 services:
-  claude-dork-portfolio-service-site-app:
+  edinception3d-claude:
     image: edinception3d-claude:${VERSION:-latest}
     build:
       context: .
